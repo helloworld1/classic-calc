@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Close">Schließen</string>
+    <string name="Lock_Current_View">Querformatansicht sperren</string>
+    <string name="No">Nein</string>
+    <string name="Reset">Zurücksetzen</string>
+    <string name="Reset_Calculator">Rücksetzen</string>
+    <string name="Reset_Message">Möchten Sie den Rechner wirklich zurücksetzen?</string>
+    <string name="Settings">Einstellungen</string>
+    <string name="Sleep">Energiesparmodus</string>
+    <string name="Sound">Ton</string>
+    <string name="Swap_Decimal_Separator">Dezimaltrennzeichen wechseln</string>
+    <string name="Vibration">Vibration</string>
+    <string name="Yes">Ja</string>
+    <string name="app_name">Classic Calc</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+</resources>

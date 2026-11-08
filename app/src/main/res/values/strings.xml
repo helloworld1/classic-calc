@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Calculator_Mode">Calculator Mode</string>
+    <string name="Close">Close</string>
+    <string name="Lock_Current_View">Orientation</string>
+    <string name="No">No</string>
+    <string name="Quick_Guide">Quick Guide</string>
+    <string name="Reset">Reset</string>
+    <string name="Reset_Calculator">Reset Calculator</string>
+    <string name="Reset_Message">Are you sure you want to reset calculator?</string>
+    <string name="Settings">Settings</string>
+    <string name="Show">Show</string>
+    <string name="Sleep">Sleep</string>
+    <string name="Sound">Sound</string>
+    <string name="Swap_Decimal_Separator">Swap Decimal Separator</string>
+    <string name="Vibration">Vibration</string>
+    <string name="Yes">Yes</string>
+    <string name="app_name">Classic Calc</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+</resources>

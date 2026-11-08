@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mode_array">
+        <item>12C</item>
+        <item>12C Platinum</item>
+        <item>15C</item>
+    </string-array>
+    <string-array name="vibration_array">
+        <item>Off</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="orientation_array">
+        <item>System</item>
+        <item>Lock Landscape</item>
+        <item>Auto</item>
+    </string-array>
+    <string-array name="sleep_array">
+        <item>Default</item>
+        <item>5 Min</item>
+        <item>10 Min</item>
+        <item>15 Min</item>
+        <item>30 Min</item>
+        <item>1 Hr</item>
+        <item>Never</item>
+    </string-array>
+</resources>

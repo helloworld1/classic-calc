@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Close">Sluiten</string>
+    <string name="Lock_Current_View">Liggende weergave vergrendelen</string>
+    <string name="No">Nee</string>
+    <string name="Reset">Herstellen</string>
+    <string name="Reset_Calculator">Opnieuw zetten rekenmachine</string>
+    <string name="Reset_Message">Weet u zeker dat u de rekenmachine wilt herstellen?</string>
+    <string name="Settings">Instellingen</string>
+    <string name="Sleep">Slaapstand</string>
+    <string name="Sound">Geluid</string>
+    <string name="Swap_Decimal_Separator">Decimaalteken omwisselen</string>
+    <string name="Vibration">Trilling</string>
+    <string name="Yes">Ja</string>
+    <string name="app_name">Classic Calc</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Close">Cerrar</string>
+    <string name="Lock_Current_View">Bloquear vista horizontal</string>
+    <string name="No">No</string>
+    <string name="Reset">Restablecer</string>
+    <string name="Reset_Calculator">restablecer la calculadora</string>
+    <string name="Reset_Message">¿Seguro que quiere restablecer la calculadora?</string>
+    <string name="Settings">Configuración</string>
+    <string name="Sleep">Suspensión</string>
+    <string name="Sound">Sonido</string>
+    <string name="Swap_Decimal_Separator">Cambiar separador decimal</string>
+    <string name="Vibration">Vibración</string>
+    <string name="Yes">Sí</string>
+    <string name="app_name">Classic Calc</string>
+    <string name="status_bar_notification_info_overflow">+999</string>
+</resources>

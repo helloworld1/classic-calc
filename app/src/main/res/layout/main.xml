@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewSwitcher android:orientation="horizontal" android:id="@id/ViewSwitcher" android:paddingRight="1.0dp" android:focusable="false" android:focusableInTouchMode="false" android:clickable="false" android:longClickable="false" android:layout_width="match_parent" android:layout_height="match_parent" android:soundEffectsEnabled="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/mainLayoutLandscape" android:background="@drawable/horizontal" android:focusable="true" android:focusableInTouchMode="true" android:longClickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:soundEffectsEnabled="false">
+        <org.liberty.android.classiccalc.ui.LcdView android:id="@id/LcdView" android:longClickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="69.0dp" android:layout_marginTop="7.0dp" android:soundEffectsEnabled="false" />
+    </FrameLayout>
+    <FrameLayout android:layout_gravity="top" android:orientation="vertical" android:id="@id/mainLayoutPortrait" android:background="@drawable/verticalcal" android:longClickable="false" android:layout_width="match_parent" android:layout_height="match_parent" android:soundEffectsEnabled="false">
+        <org.liberty.android.classiccalc.ui.LcdView android:id="@id/LcdView2" android:layout_width="238.0dp" android:layout_height="45.0dp" android:layout_marginLeft="14.0dp" android:layout_marginTop="17.0dp" />
+    </FrameLayout>
+</ViewSwitcher>
