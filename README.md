@@ -53,7 +53,7 @@ Accessible by tapping the **CLASSIC.CALC** logo or pressing the system Menu butt
 - **Key Click Sound**: Enable or disable audible key click feedback (`keypress.wav`).
 - **Haptic Feedback**: Enable or disable vibration on key press.
 - **Lock Orientation**: Auto-rotate with sensor, lock to current orientation, or force portrait/landscape.
-- **Stay Awake Timeout**: Configure screen wake timeout (Default, 3 min, 5 min, 10 min, 15 min, 1 hour, or Always On).
+- **Always on**: Keep the screen awake while the calculator is open (default off).
 - **Reset Calculator**: Clear and reset the active calculator's memory to factory defaults.
 
 ---

@@ -108,12 +108,14 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
             activity.vibrationLevel = 1;
             activity.saveBooleanPreference(false, "Sound");
             activity.saveBooleanPreference(false, "Vibration");
+            activity.saveBooleanPreference(false, "AlwaysOn");
             activity.saveBooleanPreference(false, activity.getDecimalSwapPreferenceKey());
             activity.saveBooleanPreference(false, "CalcLock");
-            activity.saveLockViewSetting(ActivityInfo.SCREEN_ORIENTATION_USER);
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+            activity.saveLockViewSetting(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+            activity.applyAlwaysOnSetting(false);
             SharedPreferences.Editor editor = activity.getSharedPreferences("CalcSettings", 0).edit();
-            editor.putInt("OrientationMode", 0);
+            editor.putInt("OrientationMode", 2);
             editor.putInt("VibrationLevel", 1);
             editor.putInt("Timeout", 0);
             editor.commit();
@@ -139,6 +141,11 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
                 Calculator.this.saveBooleanPreference(isChecked, "Sound");
                 Calculator.this.isSoundEnabled = isChecked;
                 Calculator.this.setVolumeControlStream(3);
+                return;
+            }
+            if (viewId == R.id.spinner1) {
+                Calculator.this.saveBooleanPreference(isChecked, "AlwaysOn");
+                Calculator.this.applyAlwaysOnSetting(isChecked);
             }
         }
     }
@@ -549,12 +556,7 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
         this.modeSpinner.setSelection(this.calculatorMode.index, false);
         this.modeSpinner.setOnItemSelectedListener(this);
 
-        this.sleepTimeoutSpinner = (Spinner) dialogView.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> sleepAdapter = ArrayAdapter.createFromResource(this, R.array.sleep_array, R.layout.spinner_item);
-        sleepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this.sleepTimeoutSpinner.setAdapter((SpinnerAdapter) sleepAdapter);
-        this.sleepTimeoutSpinner.setSelection(getSleepTimeoutIndex(), false);
-        this.sleepTimeoutSpinner.setOnItemSelectedListener(this);
+        Switch alwaysOnSwitch = (Switch) dialogView.findViewById(R.id.spinner1);
 
         this.orientationSpinner = (Spinner) dialogView.findViewById(R.id.myCurrentView);
         ArrayAdapter<CharSequence> orientationAdapter = ArrayAdapter.createFromResource(this, R.array.orientation_array, R.layout.spinner_item);
@@ -573,8 +575,10 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
         Switch soundSwitch = (Switch) dialogView.findViewById(R.id.mySound);
         this.decimalSwapSwitch = (Switch) dialogView.findViewById(R.id.DecimalSwap);
         SharedPreferences preferences = getSharedPreferences("CalcSettings", 0);
+        alwaysOnSwitch.setChecked(isAlwaysOnEnabled());
         soundSwitch.setChecked(preferences.getBoolean("Sound", false));
         this.decimalSwapSwitch.setChecked(preferences.getBoolean(getDecimalSwapPreferenceKey(), false));
+        alwaysOnSwitch.setOnCheckedChangeListener(this.settingsSwitchListener);
         soundSwitch.setOnCheckedChangeListener(this.settingsSwitchListener);
         this.decimalSwapSwitch.setOnCheckedChangeListener(this.settingsSwitchListener);
 
@@ -715,6 +719,20 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
         }
     }
 
+    boolean isAlwaysOnEnabled() {
+        return getSharedPreferences("CalcSettings", 0).getBoolean("AlwaysOn", false);
+    }
+
+    void applyAlwaysOnSetting(boolean enabled) {
+        if (enabled) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            this.isKeepScreenOnSet = true;
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            this.isKeepScreenOnSet = false;
+        }
+    }
+
     int getSleepTimeoutIndex() {
         return getSharedPreferences("CalcSettings", 0).getInt("Timeout", 0);
     }
@@ -825,33 +843,6 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
             }
             return;
         }
-        int timeoutMs;
-        if (position == 0) {
-            timeoutMs = 0;
-        } else if (position == 1) {
-            timeoutMs = 300000;
-        } else if (position == 2) {
-            timeoutMs = 600000;
-        } else if (position == 3) {
-            timeoutMs = 900000;
-        } else if (position == 4) {
-            timeoutMs = 180000;
-        } else {
-            timeoutMs = position == 5 ? 3600000 : -1;
-        }
-        SharedPreferences.Editor editor = getSharedPreferences("CalcSettings", 0).edit();
-        editor.putInt("Timeout", position);
-        editor.commit();
-        Log.d("ClassicCalc.Calculator", "Stay awake:" + (timeoutMs / 1000) + " sec");
-        if (position == 0) {
-            Log.d("ClassicCalc.Calculator", "Stoping idle thread if running or No action.");
-        } else if (this.idleTimeoutThread == null) {
-            Log.d("ClassicCalc.Calculator", "Starting idle thread");
-            this.isIdleThreadRunning = true;
-            startIdleTimeoutThread();
-        } else {
-            Log.d("ClassicCalc.Calculator", "Idle thread already running...");
-        }
     }
 
     @Override
@@ -918,14 +909,7 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
         }
-        if (getSleepTimeoutIndex() != 0) {
-            this.isIdleThreadRunning = true;
-            Log.d("ClassicCalc.Calculator", "Starting idle thread.");
-            Thread idleThread = this.idleTimeoutThread;
-            if (idleThread == null || !idleThread.isAlive()) {
-                startIdleTimeoutThread();
-            }
-        }
+        applyAlwaysOnSetting(isAlwaysOnEnabled());
     }
 
     @Override

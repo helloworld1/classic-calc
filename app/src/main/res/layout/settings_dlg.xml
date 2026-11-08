@@ -13,8 +13,8 @@
         </LinearLayout>
         <View android:background="?android:listDivider" android:layout_width="match_parent" android:layout_height="wrap_content" />
         <LinearLayout android:gravity="center_vertical" android:id="@id/LinearLayout066" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56.0dp">
-            <TextView android:textSize="17.0sp" android:layout_gravity="left|center_vertical" android:id="@id/TextView6" android:paddingLeft="3.0dp" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_marginLeft="10.0dp" android:layout_marginTop="8.0dp" android:layout_marginBottom="8.0dp" android:text="@string/Sleep" android:layout_weight="1.0" />
-            <Spinner android:gravity="right|center_vertical" android:id="@id/spinner1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dp" android:layout_marginRight="5.0dp" android:layout_marginBottom="4.0dp" android:minHeight="48.0dp" />
+            <TextView android:textSize="17.0sp" android:layout_gravity="left|center_vertical" android:id="@id/TextView6" android:paddingLeft="3.0dp" android:layout_width="0.0dp" android:layout_height="wrap_content" android:layout_marginLeft="10.0dp" android:layout_marginTop="8.0dp" android:layout_marginBottom="8.0dp" android:text="@string/Always_On" android:layout_weight="1.0" />
+            <Switch android:textSize="20.0sp" android:id="@id/spinner1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dp" android:minHeight="48.0dp" android:switchMinWidth="50.0sp" />
         </LinearLayout>
         <View android:background="?android:listDivider" android:layout_width="match_parent" android:layout_height="wrap_content" />
         <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/LinearLayout00" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56.0dp">
