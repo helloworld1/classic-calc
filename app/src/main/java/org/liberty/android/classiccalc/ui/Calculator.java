@@ -543,28 +543,28 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
                 .setNegativeButton(R.string.Close, (DialogInterface.OnClickListener) null)
                 .create();
         this.modeSpinner = (Spinner) dialogView.findViewById(R.id.modeSpinner);
-        ArrayAdapter<CharSequence> modeAdapter = ArrayAdapter.createFromResource(this, R.array.mode_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> modeAdapter = ArrayAdapter.createFromResource(this, R.array.mode_array, R.layout.spinner_item);
         modeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.modeSpinner.setAdapter((SpinnerAdapter) modeAdapter);
         this.modeSpinner.setSelection(this.calculatorMode.index, false);
         this.modeSpinner.setOnItemSelectedListener(this);
 
         this.sleepTimeoutSpinner = (Spinner) dialogView.findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> sleepAdapter = ArrayAdapter.createFromResource(this, R.array.sleep_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> sleepAdapter = ArrayAdapter.createFromResource(this, R.array.sleep_array, R.layout.spinner_item);
         sleepAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.sleepTimeoutSpinner.setAdapter((SpinnerAdapter) sleepAdapter);
         this.sleepTimeoutSpinner.setSelection(getSleepTimeoutIndex(), false);
         this.sleepTimeoutSpinner.setOnItemSelectedListener(this);
 
         this.orientationSpinner = (Spinner) dialogView.findViewById(R.id.myCurrentView);
-        ArrayAdapter<CharSequence> orientationAdapter = ArrayAdapter.createFromResource(this, R.array.orientation_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> orientationAdapter = ArrayAdapter.createFromResource(this, R.array.orientation_array, R.layout.spinner_item);
         orientationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.orientationSpinner.setAdapter((SpinnerAdapter) orientationAdapter);
         this.orientationSpinner.setSelection(getOrientationMode(), false);
         this.orientationSpinner.setOnItemSelectedListener(this);
 
         this.vibrationSpinner = (Spinner) dialogView.findViewById(R.id.myVibration);
-        ArrayAdapter<CharSequence> vibrationAdapter = ArrayAdapter.createFromResource(this, R.array.vibration_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> vibrationAdapter = ArrayAdapter.createFromResource(this, R.array.vibration_array, R.layout.spinner_item);
         vibrationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.vibrationSpinner.setAdapter((SpinnerAdapter) vibrationAdapter);
         this.vibrationSpinner.setSelection(this.vibrationLevel, false);
@@ -668,7 +668,7 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     int getLockViewSetting() {
-        int lockView = getSharedPreferences("CalcSettings", 0).getInt("LockView", ActivityInfo.SCREEN_ORIENTATION_USER);
+        int lockView = getSharedPreferences("CalcSettings", 0).getInt("LockView", ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
         if (lockView == ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
             return ActivityInfo.SCREEN_ORIENTATION_USER;
         }
@@ -678,13 +678,19 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
     int getOrientationMode() {
         SharedPreferences preferences = getSharedPreferences("CalcSettings", 0);
         if (preferences.contains("OrientationMode")) {
-            return preferences.getInt("OrientationMode", 0);
+            return preferences.getInt("OrientationMode", 2);
         }
-        int lockView = preferences.getInt("LockView", ActivityInfo.SCREEN_ORIENTATION_USER);
-        if (lockView != ActivityInfo.SCREEN_ORIENTATION_USER && lockView != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
-            return 1;
+        if (preferences.contains("LockView")) {
+            int lockView = preferences.getInt("LockView", ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+            if (lockView == ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR) {
+                return 2;
+            }
+            if (lockView != ActivityInfo.SCREEN_ORIENTATION_USER && lockView != ActivityInfo.SCREEN_ORIENTATION_SENSOR) {
+                return 1;
+            }
+            return 0;
         }
-        return 0;
+        return 2;
     }
 
     void applyOrientationMode(int mode) {
