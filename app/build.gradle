@@ -20,6 +20,12 @@ android {
         }
     }
 
+    androidComponents {
+        onVariants(selector().withBuildType("debug")) { variant ->
+            variant.applicationId.set("org.liberty.android.classiccalcdebug")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

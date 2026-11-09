@@ -12,6 +12,5 @@
     <string name="Swap_Decimal_Separator">小数点記号の切り替え</string>
     <string name="Vibration">バイブレーション</string>
     <string name="Yes">はい</string>
-    <string name="app_name">Classic Calc</string>
     <string name="status_bar_notification_info_overflow">999+</string>
 </resources>

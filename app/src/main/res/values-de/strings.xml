@@ -12,6 +12,5 @@
     <string name="Swap_Decimal_Separator">Dezimaltrennzeichen wechseln</string>
     <string name="Vibration">Vibration</string>
     <string name="Yes">Ja</string>
-    <string name="app_name">Classic Calc</string>
     <string name="status_bar_notification_info_overflow">999+</string>
 </resources>

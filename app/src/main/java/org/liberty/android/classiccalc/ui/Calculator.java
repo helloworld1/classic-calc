@@ -207,7 +207,11 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
 
     private void ensureCc12cLoaded() {
         if (this.emulator12C == null) {
-            this.emulator12C = new NutEmulator(false, new NutEmulator.Callback() {
+            String statePath = "/data/data/org.liberty.android.classiccalc/calc";
+            if (getApplicationInfo() != null && getApplicationInfo().dataDir != null) {
+                statePath = new File(getApplicationInfo().dataDir, "calc").getAbsolutePath();
+            }
+            this.emulator12C = new NutEmulator(false, statePath, new NutEmulator.Callback() {
                 @Override
                 public int handleKeybuffer(int command) {
                     return Calculator.this.handleKeybuffer(command);
@@ -243,7 +247,11 @@ public class Calculator extends Activity implements AdapterView.OnItemSelectedLi
 
     private void ensureCc15cLoaded() {
         if (this.emulator15C == null) {
-            this.emulator15C = new NutEmulator(true, new NutEmulator.Callback() {
+            String statePath = "/data/data/org.liberty.android.classiccalc/calc15";
+            if (getApplicationInfo() != null && getApplicationInfo().dataDir != null) {
+                statePath = new File(getApplicationInfo().dataDir, "calc15").getAbsolutePath();
+            }
+            this.emulator15C = new NutEmulator(true, statePath, new NutEmulator.Callback() {
                 @Override
                 public int handleKeybuffer(int command) {
                     return Calculator.this.handleKeybuffer(command);
