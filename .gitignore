@@ -31,3 +31,6 @@ captures/
 .DS_Store
 *~
 *.swp
+
+# Google Play release assets
+google_play_release/
