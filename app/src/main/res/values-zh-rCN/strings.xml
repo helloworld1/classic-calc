@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="Calculator_Mode">计算器模式</string>
     <string name="Close">关闭</string>
-    <string name="Lock_Current_View">锁定横向视图</string>
+    <string name="Lock_Current_View">屏幕方向</string>
     <string name="No">否</string>
+    <string name="Quick_Guide">快速指南</string>
     <string name="Reset">重置</string>
-    <string name="Reset_Calculator">复位计算器</string>
+    <string name="Reset_Calculator">重置计算器</string>
     <string name="Reset_Message">您确定要重置计算器吗？</string>
     <string name="Settings">设置</string>
-    <string name="Sleep">睡眠</string>
+    <string name="Show">显示</string>
+    <string name="Always_On">屏幕常亮</string>
+    <string name="Sleep">屏幕常亮</string>
     <string name="Sound">声音</string>
-    <string name="Swap_Decimal_Separator">切换为十进制分隔符</string>
+    <string name="Swap_Decimal_Separator">切换小数分隔符</string>
     <string name="Vibration">振动</string>
     <string name="Yes">是</string>
     <string name="status_bar_notification_info_overflow">999+</string>

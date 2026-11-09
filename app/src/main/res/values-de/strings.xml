@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="Calculator_Mode">Rechnermodus</string>
     <string name="Close">Schließen</string>
-    <string name="Lock_Current_View">Querformatansicht sperren</string>
+    <string name="Lock_Current_View">Ausrichtung</string>
     <string name="No">Nein</string>
+    <string name="Quick_Guide">Kurzanleitung</string>
     <string name="Reset">Zurücksetzen</string>
-    <string name="Reset_Calculator">Rücksetzen</string>
+    <string name="Reset_Calculator">Rechner zurücksetzen</string>
     <string name="Reset_Message">Möchten Sie den Rechner wirklich zurücksetzen?</string>
     <string name="Settings">Einstellungen</string>
-    <string name="Sleep">Energiesparmodus</string>
+    <string name="Show">Anzeigen</string>
+    <string name="Always_On">Immer eingeschaltet</string>
+    <string name="Sleep">Immer eingeschaltet</string>
     <string name="Sound">Ton</string>
     <string name="Swap_Decimal_Separator">Dezimaltrennzeichen wechseln</string>
     <string name="Vibration">Vibration</string>

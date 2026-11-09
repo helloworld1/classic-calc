@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="mode_array">
+        <item>12C</item>
+        <item>12C Platinum</item>
+        <item>15C</item>
+    </string-array>
+    <string-array name="vibration_array">
+        <item>Desactivada</item>
+        <item>Baja</item>
+        <item>Media</item>
+        <item>Alta</item>
+    </string-array>
+    <string-array name="orientation_array">
+        <item>Sistema</item>
+        <item>Bloquear horizontal</item>
+        <item>Automática</item>
+    </string-array>
     <string-array name="sleep_array">
         <item>Predeterminado</item>
-        <item>5 min.</item>
-        <item>10 min.</item>
-        <item>15 min.</item>
-        <item>30 min.</item>
-        <item>1 hora</item>
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>1 h</item>
         <item>Nunca</item>
     </string-array>
 </resources>

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="mode_array">
+        <item>12C</item>
+        <item>12C Platinum</item>
+        <item>15C</item>
+    </string-array>
+    <string-array name="vibration_array">
+        <item>Desativada</item>
+        <item>Baixa</item>
+        <item>Média</item>
+        <item>Alta</item>
+    </string-array>
+    <string-array name="orientation_array">
+        <item>Sistema</item>
+        <item>Fixar paisagem</item>
+        <item>Automática</item>
+    </string-array>
     <string-array name="sleep_array">
-        <item>Predefinição</item>
+        <item>Padrão</item>
         <item>5 min</item>
         <item>10 min</item>
         <item>15 min</item>

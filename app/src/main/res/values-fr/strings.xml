@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="Calculator_Mode">Mode de calculatrice</string>
     <string name="Close">Fermer</string>
-    <string name="Lock_Current_View">Verrouiller le mode paysage</string>
+    <string name="Lock_Current_View">Orientation</string>
     <string name="No">Non</string>
+    <string name="Quick_Guide">Guide rapide</string>
     <string name="Reset">Réinitialiser</string>
-    <string name="Reset_Calculator">réinitialiser Calculatrice</string>
-    <string name="Reset_Message">Voulez-vous vraiment réinitialiser la calculatrice ?</string>
+    <string name="Reset_Calculator">Réinitialiser la calculatrice</string>
+    <string name="Reset_Message">Voulez-vous vraiment réinitialiser la calculatrice ?</string>
     <string name="Settings">Paramètres</string>
-    <string name="Sleep">Veille</string>
+    <string name="Show">Afficher</string>
+    <string name="Always_On">Toujours allumé</string>
+    <string name="Sleep">Toujours allumé</string>
     <string name="Sound">Son</string>
     <string name="Swap_Decimal_Separator">Permuter le séparateur décimal</string>
     <string name="Vibration">Vibreur</string>

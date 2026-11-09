@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="mode_array">
+        <item>12C</item>
+        <item>12C Platinum</item>
+        <item>15C</item>
+    </string-array>
+    <string-array name="vibration_array">
+        <item>オフ</item>
+        <item>弱</item>
+        <item>中</item>
+        <item>強</item>
+    </string-array>
+    <string-array name="orientation_array">
+        <item>システム</item>
+        <item>横画面に固定</item>
+        <item>自動</item>
+    </string-array>
     <string-array name="sleep_array">
-        <item>初期設定</item>
+        <item>デフォルト</item>
         <item>5 分</item>
         <item>10 分</item>
         <item>15 分</item>
         <item>30 分</item>
-        <item>1時間</item>
-        <item>行わない</item>
+        <item>1 時間</item>
+        <item>なし</item>
     </string-array>
 </resources>

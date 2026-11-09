@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="mode_array">
+        <item>12C</item>
+        <item>12C Platinum</item>
+        <item>15C</item>
+    </string-array>
+    <string-array name="vibration_array">
+        <item>Aus</item>
+        <item>Niedrig</item>
+        <item>Mittel</item>
+        <item>Hoch</item>
+    </string-array>
+    <string-array name="orientation_array">
+        <item>System</item>
+        <item>Querformat sperren</item>
+        <item>Automatisch</item>
+    </string-array>
     <string-array name="sleep_array">
         <item>Standard</item>
         <item>5 Min</item>

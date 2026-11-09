@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="mode_array">
+        <item>12C</item>
+        <item>12C Platinum</item>
+        <item>15C</item>
+    </string-array>
+    <string-array name="vibration_array">
+        <item>Uit</item>
+        <item>Laag</item>
+        <item>Gemiddeld</item>
+        <item>Hoog</item>
+    </string-array>
+    <string-array name="orientation_array">
+        <item>Systeem</item>
+        <item>Liggend vergrendelen</item>
+        <item>Automatisch</item>
+    </string-array>
     <string-array name="sleep_array">
         <item>Standaard</item>
-        <item>5 min.</item>
-        <item>10 min.</item>
-        <item>15 min.</item>
-        <item>30 min.</item>
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>15 min</item>
+        <item>30 min</item>
         <item>1 uur</item>
         <item>Nooit</item>
     </string-array>
