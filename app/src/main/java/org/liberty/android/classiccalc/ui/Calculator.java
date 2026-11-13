@@ -2,12 +2,10 @@ package org.liberty.android.classiccalc.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -554,32 +552,12 @@ public class Calculator extends Activity {
         super.onDestroy();
     }
 
-    private void updateLauncherIcon() {
-        PackageManager packageManager = getPackageManager();
-        String pkgName = getPackageName();
-        ComponentName targetComponent = new ComponentName(pkgName, this.calculatorMode.launcherAliasName);
-        int currentState = packageManager.getComponentEnabledSetting(targetComponent);
-        boolean isTargetAlreadyEnabled = (currentState == PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
-                || (currentState == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT && this.calculatorMode == CalculatorMode.CC_12C);
-        if (isTargetAlreadyEnabled) {
-            return;
-        }
-        for (CalculatorMode mode : CalculatorMode.values()) {
-            ComponentName componentName = new ComponentName(pkgName, mode.launcherAliasName);
-            int newState = (mode == this.calculatorMode)
-                    ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                    : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-            packageManager.setComponentEnabledSetting(componentName, newState, PackageManager.DONT_KILL_APP);
-        }
-    }
-
     @Override
     protected void onPause() {
         Log.d("ClassicCalc.Calculator", "Pausing app...");
         Log.d("ClassicCalc.Calculator", "Stopping Clac Thread");
         stopCalculationThread();
         saveActiveCalcData();
-        updateLauncherIcon();
         Thread idleThread = this.idleTimeoutThread;
         if (idleThread != null && idleThread.isAlive()) {
             Log.d("ClassicCalc.Calculator", "Stopping idle thread.");

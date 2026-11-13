@@ -1,11 +1,15 @@
 package org.liberty.android.classiccalc.ui;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Insets;
@@ -30,6 +34,8 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 import org.liberty.android.classiccalc.R;
 
 public class SettingsActivity extends Activity
@@ -146,6 +152,88 @@ public class SettingsActivity extends Activity
             deviceVibrator.vibrate(VibrationEffect.createOneShot(durationMs, effectAmplitude));
         } else {
             deviceVibrator.vibrate(durationMs);
+        }
+    }
+
+    static boolean isLauncherAliasEnabled(
+            PackageManager packageManager, ComponentName componentName, CalculatorMode mode) {
+        int state = packageManager.getComponentEnabledSetting(componentName);
+        if (state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+            return true;
+        }
+        if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT) {
+            return mode == CalculatorMode.CC_12C;
+        }
+        return false;
+    }
+
+    static void updateLauncherIcon(Context context, CalculatorMode targetMode) {
+        if (context == null || targetMode == null) {
+            return;
+        }
+        PackageManager packageManager = context.getPackageManager();
+        String pkgName = context.getPackageName();
+        ComponentName targetComponent = new ComponentName(pkgName, targetMode.launcherAliasName);
+        boolean isTargetEnabled =
+                isLauncherAliasEnabled(packageManager, targetComponent, targetMode);
+
+        List<ComponentName> aliasesToDisable = new ArrayList<>();
+        for (CalculatorMode mode : CalculatorMode.values()) {
+            if (mode == targetMode) {
+                continue;
+            }
+            ComponentName componentName = new ComponentName(pkgName, mode.launcherAliasName);
+            if (isLauncherAliasEnabled(packageManager, componentName, mode)) {
+                aliasesToDisable.add(componentName);
+            }
+        }
+
+        if (isTargetEnabled && aliasesToDisable.isEmpty()) {
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Api33LauncherIconHelper.applyLauncherIconChanges(
+                    packageManager, targetComponent, !isTargetEnabled, aliasesToDisable);
+        } else {
+            if (!isTargetEnabled) {
+                packageManager.setComponentEnabledSetting(
+                        targetComponent,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP);
+            }
+            for (ComponentName alias : aliasesToDisable) {
+                packageManager.setComponentEnabledSetting(
+                        alias,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
+            }
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.TIRAMISU)
+    private static final class Api33LauncherIconHelper {
+        static void applyLauncherIconChanges(
+                PackageManager packageManager,
+                ComponentName targetComponent,
+                boolean enableTarget,
+                List<ComponentName> aliasesToDisable) {
+            List<PackageManager.ComponentEnabledSetting> settings = new ArrayList<>();
+            if (enableTarget) {
+                settings.add(new PackageManager.ComponentEnabledSetting(
+                        targetComponent,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP));
+            }
+            for (ComponentName alias : aliasesToDisable) {
+                settings.add(new PackageManager.ComponentEnabledSetting(
+                        alias,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP));
+            }
+            if (!settings.isEmpty()) {
+                packageManager.setComponentEnabledSettings(settings);
+            }
         }
     }
 
