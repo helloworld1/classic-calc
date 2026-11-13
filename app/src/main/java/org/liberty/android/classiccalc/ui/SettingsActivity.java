@@ -2,8 +2,8 @@ package org.liberty.android.classiccalc.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
@@ -12,7 +12,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Build;
@@ -24,13 +23,11 @@ import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Switch;
@@ -54,7 +51,6 @@ public class SettingsActivity extends Activity
     private Switch soundSwitch;
     private Switch decimalSwapSwitch;
 
-    private Dialog backCoverDialog;
     private AlertDialog resetConfirmDialog;
 
     static String getDecimalSwapPrefKey(CalculatorMode mode) {
@@ -255,7 +251,7 @@ public class SettingsActivity extends Activity
             quickGuideRow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showBackCoverDialog();
+                    startActivity(new Intent(SettingsActivity.this, QuickGuideActivity.class));
                 }
             });
         }
@@ -323,9 +319,6 @@ public class SettingsActivity extends Activity
 
     @Override
     protected void onPause() {
-        if (this.backCoverDialog != null && this.backCoverDialog.isShowing()) {
-            this.backCoverDialog.dismiss();
-        }
         if (this.resetConfirmDialog != null && this.resetConfirmDialog.isShowing()) {
             this.resetConfirmDialog.dismiss();
         }
@@ -475,39 +468,6 @@ public class SettingsActivity extends Activity
         } else {
             editor.commit();
         }
-    }
-
-    private void showBackCoverDialog() {
-        Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        this.backCoverDialog = dialog;
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View backView = getLayoutInflater().inflate(R.layout.back_layout, (ViewGroup) null);
-        View.OnClickListener closeBackCoverClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SettingsActivity.this.backCoverDialog != null
-                        && SettingsActivity.this.backCoverDialog.isShowing()) {
-                    SettingsActivity.this.backCoverDialog.dismiss();
-                }
-            }
-        };
-        ImageView backCoverImage = (ImageView) backView.findViewById(R.id.backCoverImage);
-        if (backCoverImage != null) {
-            backCoverImage.setImageResource(this.currentMode.backCoverDrawableId);
-            backCoverImage.setOnClickListener(closeBackCoverClickListener);
-        }
-        backView.setOnClickListener(closeBackCoverClickListener);
-        dialog.setContentView(backView);
-        if (dialog.getWindow() != null) {
-            dialog.getWindow().setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT);
-            dialog.getWindow().setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-        }
-        dialog.show();
     }
 
     private void showResetConfirmDialog() {

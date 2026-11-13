@@ -25,6 +25,13 @@
             android:name="org.liberty.android.classiccalc.ui.SettingsActivity"
             android:theme="@style/SettingsTheme">
         </activity>
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:label="@string/Quick_Guide"
+            android:name="org.liberty.android.classiccalc.ui.QuickGuideActivity"
+            android:theme="@style/SettingsTheme">
+        </activity>
         <activity-alias
             android:enabled="true"
             android:exported="true"
