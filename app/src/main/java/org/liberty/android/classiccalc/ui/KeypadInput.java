@@ -9,8 +9,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
-import android.os.Build;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -397,7 +395,7 @@ public class KeypadInput {
                             ? keypadInput.landscapeLogoRect
                             : keypadInput.portraitLogoRect;
                     if (keypadInput.isTouchInside(logoRect)) {
-                        keypadInput.calculatorActivity.showSettingsDialog();
+                        keypadInput.calculatorActivity.openSettingsScreen();
                     }
                 }
                 keypadInput.clearKeyHighlight();
@@ -731,29 +729,7 @@ public class KeypadInput {
     }
 
     void triggerVibration() {
-        Vibrator deviceVibrator;
-        int level = this.calculatorActivity.vibrationLevel;
-        if (level <= 0 || (deviceVibrator = this.vibrator) == null) {
-            return;
-        }
-        long durationMs;
-        int amplitude;
-        if (level == 1) {
-            durationMs = 15L;
-            amplitude = 64;
-        } else if (level == 2) {
-            durationMs = 30L;
-            amplitude = 150;
-        } else {
-            durationMs = 60L;
-            amplitude = 255;
-        }
-        if (Build.VERSION.SDK_INT >= 26) {
-            int effectAmplitude = deviceVibrator.hasAmplitudeControl() ? amplitude : VibrationEffect.DEFAULT_AMPLITUDE;
-            deviceVibrator.vibrate(VibrationEffect.createOneShot(durationMs, effectAmplitude));
-        } else {
-            deviceVibrator.vibrate(durationMs);
-        }
+        SettingsActivity.triggerVibrationForLevel(this.vibrator, this.calculatorActivity.vibrationLevel);
     }
 
     Rect scaleRect(int left, int top, int right, int bottom) {

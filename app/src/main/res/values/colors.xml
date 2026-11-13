@@ -8,4 +8,18 @@
     <color name="ripple_material_light">#1f000000</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
+
+    <color name="settings_bg">#ff14161a</color>
+    <color name="settings_popup_bg">#ff262932</color>
+    <color name="settings_popup_stroke">#ff454a57</color>
+    <color name="settings_divider">#ff2b2f38</color>
+    <color name="settings_text_primary">#fff1f3f5</color>
+    <color name="settings_text_secondary">#ffa5acb8</color>
+    <color name="settings_accent">#ff4fc3f7</color>
+    <color name="settings_selected_item_bg">#2e4fc3f7</color>
+    <color name="settings_switch_track_on">#ff0288d1</color>
+    <color name="settings_switch_track_off">#ff3a3e48</color>
+    <color name="settings_switch_track_off_stroke">#ff7c8391</color>
+    <color name="settings_switch_thumb_on">#ffffffff</color>
+    <color name="settings_switch_thumb_off">#ffd5d9e0</color>
 </resources>

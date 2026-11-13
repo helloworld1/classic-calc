@@ -18,6 +18,13 @@
             android:launchMode="singleTask"
             android:name="org.liberty.android.classiccalc.ui.Calculator">
         </activity>
+        <activity
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:label="@string/Settings"
+            android:name="org.liberty.android.classiccalc.ui.SettingsActivity"
+            android:theme="@style/SettingsTheme">
+        </activity>
         <activity-alias
             android:enabled="true"
             android:exported="true"
