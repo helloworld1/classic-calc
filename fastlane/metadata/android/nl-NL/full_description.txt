@@ -1,0 +1,13 @@
+Classic Calc brengt drie iconische financiële en wetenschappelijke rekenmachines uit de Voyager-serie samen in één pure Java Android-app: CC 12C Financieel, CC 12C Platinum en CC 15C Wetenschappelijk.
+
+Rekenmachinemodi:
+- CC 12C Financieel: Authentieke Omgekeerde Poolse Notatie (RPN) met 4-niveaustack, tijdswaarde van geld (TVM), kasstroomanalyse (NPV & IRR), aflossing, obligatiekoers en rendement (YTM), afschrijving (SL, SOYD, DB), datumberekeningen, statistiek met twee variabelen / lineaire regressie en toetsprogrammering
+- CC 12C Platinum: Alle functies van de 12C plus dubbele RPN- en Algebraïsche modus (ALG) met haakjes, registerrekenen, x², ongedaan maken/backspace en uitgebreide programma- en registercapaciteit
+- CC 15C Wetenschappelijk: Volledig programmeerbare wetenschappelijke RPN-rekenmachine met goniometrische en hyperbolische functies (DEG/RAD/GRD), complexe getallen, matrixbewerkingen, numerieke SOLVE en integratie, faculteit, permutaties, combinaties, willekeurige getallen en uitgebreide programmering (LBL, GSB, RTN, vlaggen, ISG/DSE, indirecte adressering)
+
+Functies:
+- Aangepast 7-segments LCD-scherm met authentieke statusindicatoren (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
+- Specifieke staande en liggende toetsindelingen voor elke rekenmachinemodus
+- Ingebouwde snelstartgids met de referentieplaat voor elk model
+- Dynamisch startpictogram dat overeenkomt met de actieve modus en automatisch opslaan van de status
+- Instelbaar toetsklikgeluid, trillingssterkte, schermstand (Automatisch, Liggend vergrendelen, Systeem), Altijd aan-schakelaar en wisselen van decimaalteken

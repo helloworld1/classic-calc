@@ -34,3 +34,9 @@ captures/
 
 # Google Play release assets
 google_play_release/
+
+# Fastlane / Bundler generated files
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/test_output/
+vendor/bundle/

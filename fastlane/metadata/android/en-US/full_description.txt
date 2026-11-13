@@ -1,0 +1,13 @@
+Classic Calc brings three iconic Voyager-series financial and scientific calculators to Android in a single pure-Java app: CC 12C Financial, CC 12C Platinum, and CC 15C Scientific.
+
+Calculator Modes:
+- CC 12C Financial: Authentic Reverse Polish Notation (RPN) 4-level stack, Time Value of Money (TVM), Cash Flow analysis (NPV & IRR), Amortization, Bond Price & YTM, Depreciation (SL, SOYD, DB), Date arithmetic, two-variable statistics / linear regression, and keystroke programming
+- CC 12C Platinum: Everything in the 12C plus dual RPN and Algebraic (ALG) modes with parentheses, storage register arithmetic, x^2, undo/backspace, and expanded program and register capacity
+- CC 15C Scientific: Full RPN scientific programmable calculator with trigonometric and hyperbolic functions (DEG/RAD/GRD), complex numbers, matrix operations, numerical SOLVE and integration, factorials, permutations, combinations, random numbers, and full keystroke programmability (LBL, GSB, RTN, flags, ISG/DSE, indirect addressing)
+
+Features:
+- Custom 7-segment LCD display with authentic status annunciators (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
+- Portrait and landscape layouts for every calculator mode
+- Built-in Quick Guide reference plate for each calculator
+- Dynamic launcher icon and state persistence across calculator modes
+- Configurable key click sound, vibration strength, orientation mode (Auto, Lock Landscape, System), Always on screen toggle, and US/European decimal separator swap

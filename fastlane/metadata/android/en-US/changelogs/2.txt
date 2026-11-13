@@ -1,0 +1,4 @@
+- Improved Settings dialog alignment and set default orientation mode to Auto
+- Replaced the Sleep dropdown with an Always on toggle switch (off by default)
+- Updated and completed translations across all supported languages
+- Updated minimum Android SDK to 24 (Android 7.0)

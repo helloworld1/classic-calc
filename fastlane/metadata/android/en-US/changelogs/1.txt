@@ -1,0 +1,3 @@
+- Initial release with CC 12C Financial, CC 12C Platinum (RPN & ALG), and CC 15C Scientific calculators
+- Portrait and landscape keypad layouts with custom 7-segment LCD and status annunciators
+- Built-in Quick Guide reference plates, automatic state persistence, sound, haptic feedback, and decimal separator swap

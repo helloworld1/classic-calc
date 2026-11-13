@@ -1,0 +1,13 @@
+Classic Calc bringt drei legendäre Finanz- und Wissenschaftsrechner der Voyager-Serie in einer einzigen reinen Java-Android-App zusammen: CC 12C Finanzrechner, CC 12C Platinum und CC 15C Wissenschaftsrechner.
+
+Rechnermodi:
+- CC 12C Finanz: Authentische umgekehrte polnische Notation (RPN/UPN) mit 4-Ebenen-Stack, Finanzmathematik (TVM), Cashflow-Analyse (NPV & IRR), Tilgung, Anleihekurs & -rendite (YTM), Abschreibung (SL, SOYD, DB), Datumsberechnung, Zweivariablen-Statistik / lineare Regression und Tastenprogrammierung
+- CC 12C Platinum: Alle Funktionen des 12C plus umschaltbarem RPN- und Algebraik-Modus (ALG) mit Klammern, Speicherregister-Arithmetik, x², Rückgängig/Löschen sowie erweiterter Programm- und Speicherkapazität
+- CC 15C Wissenschaft: Vollwertiger programmierbarer RPN-Wissenschaftsrechner mit trigonometrischen und hyperbolischen Funktionen (DEG/RAD/GRD), komplexen Zahlen, Matrixoperationen, numerischem Gleichungslöser (SOLVE) und Integration, Fakultät, Permutationen, Kombinationen, Zufallszahlen und vollständiger Tastenprogrammierung (LBL, GSB, RTN, Flags, ISG/DSE, indirekte Adressierung)
+
+Funktionen:
+- Individuelles 7-Segment-LCD-Display mit originalgetreuen Statusanzeigen (RPN, ALG, f, g, BEGIN, G/RAD, D.MY, C, PRGM)
+- Hoch- und Querformat-Layouts für jeden Rechnermodus
+- Integrierte Kurzanleitung (Rückseiten-Referenz) für jeden Rechner
+- Dynamisches App-Symbol passend zum aktiven Modus und automatische Zustandsspeicherung
+- Konfigurierbarer Tastenklickton, Vibrationsstärke, Ausrichtungsmodus (Auto, Querformat sperren, System), „Immer eingeschaltet“-Schalter und Wechsel des Dezimaltrennzeichens (US/Europäisch)
