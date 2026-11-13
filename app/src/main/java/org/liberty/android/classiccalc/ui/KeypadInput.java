@@ -348,6 +348,8 @@ public class KeypadInput {
                 if (!keypadInput.calculatorActivity.isLandscape()) {
                     if (keypadInput.isTouchInside(keypadInput.portraitLogoRect)) {
                         keypadInput.isLogoPressed = true;
+                        keypadInput.playClickSound();
+                        keypadInput.triggerVibration();
                     } else {
                         for (int keyIndex = 0; keyIndex < keypadInput.portraitKeyRects.length; keyIndex++) {
                             if (keypadInput.isTouchInside(keypadInput.portraitKeyRects[keyIndex])) {
@@ -359,6 +361,8 @@ public class KeypadInput {
                 } else {
                     if (keypadInput.isTouchInside(keypadInput.landscapeLogoRect)) {
                         keypadInput.isLogoPressed = true;
+                        keypadInput.playClickSound();
+                        keypadInput.triggerVibration();
                     } else {
                         for (int keyIndex = 0; keyIndex < keypadInput.landscapeKeyRects.length; keyIndex++) {
                             if (keypadInput.isTouchInside(keypadInput.landscapeKeyRects[keyIndex])) {
