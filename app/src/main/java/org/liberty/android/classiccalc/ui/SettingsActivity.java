@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Insets;
@@ -195,17 +193,6 @@ public class SettingsActivity extends Activity
             });
         }
 
-        TextView versionText = (TextView) findViewById(R.id.settingsVersionText);
-        if (versionText != null) {
-            String appLabel = getString(R.string.app_name);
-            try {
-                PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-                versionText.setText(appLabel + " " + packageInfo.versionName + "(" + packageInfo.versionCode + ")");
-            } catch (PackageManager.NameNotFoundException unused) {
-                versionText.setText(appLabel);
-            }
-        }
-
         this.modeSpinner = (Spinner) findViewById(R.id.modeSpinner);
         this.modeSpinner.setAdapter(createSpinnerAdapter(this.modeSpinner, R.array.mode_array));
         this.modeSpinner.setSelection(this.currentMode.index, false);
@@ -312,6 +299,21 @@ public class SettingsActivity extends Activity
                 @Override
                 public void onClick(View v) {
                     showResetConfirmDialog();
+                }
+            });
+        }
+
+        TextView aboutTextView = (TextView) findViewById(R.id.About_TextView);
+        if (aboutTextView != null) {
+            aboutTextView.setText(getString(R.string.About_App, getString(R.string.app_name)));
+        }
+
+        View aboutRow = findViewById(R.id.LinearLayoutAbout);
+        if (aboutRow != null) {
+            aboutRow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(SettingsActivity.this, AboutActivity.class));
                 }
             });
         }

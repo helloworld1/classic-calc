@@ -15,6 +15,9 @@
     <string name="Sound">Son</string>
     <string name="Swap_Decimal_Separator">Permuter le séparateur décimal</string>
     <string name="Vibration">Vibreur</string>
+    <string name="About_App">À propos de %1$s</string>
+    <string name="Version_Name">Version</string>
+    <string name="Version_Code">Code de version</string>
     <string name="Yes">Oui</string>
     <string name="status_bar_notification_info_overflow">999+</string>
 </resources>

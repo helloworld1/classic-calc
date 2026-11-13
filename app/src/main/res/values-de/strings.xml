@@ -15,6 +15,9 @@
     <string name="Sound">Ton</string>
     <string name="Swap_Decimal_Separator">Dezimaltrennzeichen wechseln</string>
     <string name="Vibration">Vibration</string>
+    <string name="About_App">Über %1$s</string>
+    <string name="Version_Name">Version</string>
+    <string name="Version_Code">Versionscode</string>
     <string name="Yes">Ja</string>
     <string name="status_bar_notification_info_overflow">999+</string>
 </resources>
