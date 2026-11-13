@@ -321,35 +321,13 @@ public class KeypadInput {
             if (mappedKeyIndex != -1 && keypadInput.landscapeKeyRects[mappedKeyIndex] != null) {
                 if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
                     if (!keypadInput.isHardwareKeyPressed) {
-                        keypadInput.highlightedKeyBounds.set(keypadInput.landscapeKeyRects[mappedKeyIndex]);
-                        keypadInput.activeKeyIndex = mappedKeyIndex;
-                        keypadInput.keyState = KeyState.PRESSED;
-                        Rect dirtyRect = new Rect(0, 0, 0, 0);
-                        RectF highlightBounds = keypadInput.highlightedKeyBounds;
-                        dirtyRect.bottom = (int) highlightBounds.bottom;
-                        dirtyRect.right = (int) highlightBounds.right;
-                        dirtyRect.left = (int) highlightBounds.left;
-                        dirtyRect.top = (int) highlightBounds.top;
-                        keypadInput.highlightOverlayView.invalidate(dirtyRect);
-                        keypadInput.handleKeyDown();
-                        keypadInput.playClickSound();
-                        keypadInput.triggerVibration();
+                        keypadInput.showKeyPressedFeedback(keypadInput.landscapeKeyRects[mappedKeyIndex], mappedKeyIndex);
                         keypadInput.isHardwareKeyPressed = true;
                     }
                 } else if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
-                    keypadInput.keyState = KeyState.RELEASED;
-                    Rect dirtyRect = new Rect(0, 0, 0, 0);
-                    RectF highlightBounds = keypadInput.highlightedKeyBounds;
-                    dirtyRect.bottom = (int) highlightBounds.bottom;
-                    dirtyRect.right = (int) highlightBounds.right;
-                    dirtyRect.left = (int) highlightBounds.left;
-                    dirtyRect.top = (int) highlightBounds.top;
-                    keypadInput.highlightOverlayView.invalidate(dirtyRect);
-                    if (keypadInput.activeKeyIndex != -1) {
-                        keypadInput.isHardwareKeyPressed = false;
-                        keypadInput.handleKeyUp();
-                        keypadInput.activeKeyIndex = -1;
-                    }
+                    keypadInput.clearKeyHighlight();
+                    keypadInput.isHardwareKeyPressed = false;
+                    keypadInput.registerActiveKey();
                 }
             }
             return false;
@@ -362,12 +340,11 @@ public class KeypadInput {
 
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
+            KeypadInput keypadInput = KeypadInput.this;
             int action = motionEvent.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
-                KeypadInput keypadInput = KeypadInput.this;
                 keypadInput.touchX = motionEvent.getX();
                 keypadInput.touchY = motionEvent.getY();
-                boolean matched = false;
                 keypadInput.activeKeyIndex = -1;
                 keypadInput.isLogoPressed = false;
                 if (!keypadInput.calculatorActivity.isLandscape()) {
@@ -376,10 +353,7 @@ public class KeypadInput {
                     } else {
                         for (int keyIndex = 0; keyIndex < keypadInput.portraitKeyRects.length; keyIndex++) {
                             if (keypadInput.isTouchInside(keypadInput.portraitKeyRects[keyIndex])) {
-                                keypadInput.highlightedKeyBounds.set(keypadInput.portraitKeyRects[keyIndex]);
-                                keypadInput.activeKeyIndex = keyIndex;
-                                keypadInput.keyState = KeyState.PRESSED;
-                                matched = true;
+                                keypadInput.showKeyPressedFeedback(keypadInput.portraitKeyRects[keyIndex], keyIndex);
                                 break;
                             }
                         }
@@ -390,29 +364,13 @@ public class KeypadInput {
                     } else {
                         for (int keyIndex = 0; keyIndex < keypadInput.landscapeKeyRects.length; keyIndex++) {
                             if (keypadInput.isTouchInside(keypadInput.landscapeKeyRects[keyIndex])) {
-                                keypadInput.highlightedKeyBounds.set(keypadInput.landscapeKeyRects[keyIndex]);
-                                keypadInput.activeKeyIndex = keyIndex;
-                                keypadInput.keyState = KeyState.PRESSED;
-                                matched = true;
+                                keypadInput.showKeyPressedFeedback(keypadInput.landscapeKeyRects[keyIndex], keyIndex);
                                 break;
                             }
                         }
                     }
                 }
-                if (matched) {
-                    Rect dirtyRect = new Rect(0, 0, 0, 0);
-                    RectF highlightBounds = keypadInput.highlightedKeyBounds;
-                    dirtyRect.bottom = (int) highlightBounds.bottom;
-                    dirtyRect.right = (int) highlightBounds.right;
-                    dirtyRect.left = (int) highlightBounds.left;
-                    dirtyRect.top = (int) highlightBounds.top;
-                    keypadInput.highlightOverlayView.invalidate(dirtyRect);
-                    keypadInput.handleKeyDown();
-                    keypadInput.playClickSound();
-                    keypadInput.triggerVibration();
-                }
             } else if (action == MotionEvent.ACTION_MOVE) {
-                KeypadInput keypadInput = KeypadInput.this;
                 keypadInput.touchX = motionEvent.getX();
                 keypadInput.touchY = motionEvent.getY();
                 if (keypadInput.isLogoPressed) {
@@ -423,23 +381,14 @@ public class KeypadInput {
                         keypadInput.isLogoPressed = false;
                     }
                 }
-                if (keypadInput.activeKeyIndex != -1 && keypadInput.calculatorActivity.isLandscape()) {
-                    int menuKeyIndex = keypadInput.calculatorActivity.getCalculatorMode() == CalculatorMode.CC_12CP ? 3 : 30;
-                    if (keypadInput.activeKeyIndex == menuKeyIndex
-                            && !keypadInput.isTouchInside(keypadInput.landscapeKeyRects[menuKeyIndex])) {
-                        keypadInput.keyState = KeyState.RELEASED;
-                        Rect dirtyRect = new Rect(0, 0, 0, 0);
-                        RectF highlightBounds = keypadInput.highlightedKeyBounds;
-                        dirtyRect.bottom = (int) highlightBounds.bottom;
-                        dirtyRect.right = (int) highlightBounds.right;
-                        dirtyRect.left = (int) highlightBounds.left;
-                        dirtyRect.top = (int) highlightBounds.top;
-                        keypadInput.highlightOverlayView.invalidate(dirtyRect);
+                if (keypadInput.activeKeyIndex != -1) {
+                    Rect activeRect = keypadInput.getActiveKeyRect(keypadInput.activeKeyIndex);
+                    if (!keypadInput.isTouchInside(activeRect)) {
+                        keypadInput.clearKeyHighlight();
                         keypadInput.activeKeyIndex = -1;
                     }
                 }
             } else if (action == MotionEvent.ACTION_UP) {
-                KeypadInput keypadInput = KeypadInput.this;
                 keypadInput.touchX = motionEvent.getX();
                 keypadInput.touchY = motionEvent.getY();
                 if (keypadInput.isLogoPressed) {
@@ -451,29 +400,16 @@ public class KeypadInput {
                         keypadInput.calculatorActivity.showSettingsDialog();
                     }
                 }
-                keypadInput.keyState = KeyState.RELEASED;
-                Rect dirtyRect = new Rect(0, 0, 0, 0);
-                RectF highlightBounds = keypadInput.highlightedKeyBounds;
-                dirtyRect.bottom = (int) highlightBounds.bottom;
-                dirtyRect.right = (int) highlightBounds.right;
-                dirtyRect.left = (int) highlightBounds.left;
-                dirtyRect.top = (int) highlightBounds.top;
-                keypadInput.highlightOverlayView.invalidate(dirtyRect);
+                keypadInput.clearKeyHighlight();
                 if (keypadInput.activeKeyIndex != -1) {
-                    keypadInput.handleKeyUp();
-                    keypadInput.activeKeyIndex = -1;
+                    Rect activeRect = keypadInput.getActiveKeyRect(keypadInput.activeKeyIndex);
+                    if (keypadInput.isTouchInside(activeRect)) {
+                        keypadInput.registerActiveKey();
+                    } else {
+                        keypadInput.activeKeyIndex = -1;
+                    }
                 }
             } else if (action == MotionEvent.ACTION_CANCEL) {
-                KeypadInput keypadInput = KeypadInput.this;
-                keypadInput.isLogoPressed = false;
-                keypadInput.keyState = KeyState.RELEASED;
-                Rect dirtyRect = new Rect(0, 0, 0, 0);
-                RectF highlightBounds = keypadInput.highlightedKeyBounds;
-                dirtyRect.bottom = (int) highlightBounds.bottom;
-                dirtyRect.right = (int) highlightBounds.right;
-                dirtyRect.left = (int) highlightBounds.left;
-                dirtyRect.top = (int) highlightBounds.top;
-                keypadInput.highlightOverlayView.invalidate(dirtyRect);
                 keypadInput.releaseActiveKey();
             }
             return false;
@@ -506,9 +442,8 @@ public class KeypadInput {
                     highlightRect.top += 5.0f;
                     highlightRect.bottom -= 5.0f;
                 }
-                if (KeypadInput.this.keyState == KeyState.PRESSED) {
+                if (currentKeyState == KeyState.PRESSED) {
                     paint.setColor(Color.argb(180, 38, 38, 38));
-                    KeypadInput.this.keyState = KeyState.RELEASED;
                 } else {
                     paint.setColor(Color.argb(0, 0, 0, 255));
                     KeypadInput.this.keyState = KeyState.IDLE;
@@ -744,28 +679,54 @@ public class KeypadInput {
         this.mainLayout = null;
     }
 
-    public void releaseActiveKey() {
-        if (this.activeKeyIndex == -1) {
+    private Rect getActiveKeyRect(int keyIndex) {
+        if (keyIndex < 0) {
+            return null;
+        }
+        Rect[] rects = this.calculatorActivity.isLandscape() ? this.landscapeKeyRects : this.portraitKeyRects;
+        return keyIndex < rects.length ? rects[keyIndex] : null;
+    }
+
+    private void invalidateHighlightBounds() {
+        if (this.highlightOverlayView == null) {
             return;
         }
-        int keyIndex = this.activeKeyIndex;
-        this.activeKeyIndex = -1;
+        Rect dirtyRect = new Rect(
+                (int) Math.floor(this.highlightedKeyBounds.left),
+                (int) Math.floor(this.highlightedKeyBounds.top),
+                (int) Math.ceil(this.highlightedKeyBounds.right),
+                (int) Math.ceil(this.highlightedKeyBounds.bottom));
+        this.highlightOverlayView.invalidate(dirtyRect);
+    }
+
+    private void showKeyPressedFeedback(Rect keyRect, int keyIndex) {
+        this.highlightedKeyBounds.set(keyRect);
+        this.activeKeyIndex = keyIndex;
+        this.keyState = KeyState.PRESSED;
+        invalidateHighlightBounds();
+        playClickSound();
+        triggerVibration();
+    }
+
+    private void clearKeyHighlight() {
+        this.keyState = KeyState.RELEASED;
+        invalidateHighlightBounds();
+    }
+
+    private void registerActiveKey() {
+        if (this.activeKeyIndex != -1) {
+            handleKeyDown();
+            handleKeyUp();
+            this.activeKeyIndex = -1;
+        }
+    }
+
+    public void releaseActiveKey() {
+        this.isLogoPressed = false;
         this.isHardwareKeyPressed = false;
-        CalculatorMode mode = this.calculatorActivity.getCalculatorMode();
-        if (mode == CalculatorMode.CC_12CP) {
-            boolean isLandscape = this.calculatorActivity.isLandscape();
-            if (isLandscape && keyIndex == 3) {
-                return;
-            }
-            int nativeCode = map12CPKeyIndexToNativeCode(keyIndex, isLandscape);
-            if (nativeCode != -1 && this.calculatorActivity.calculationThread != null) {
-                this.calculatorActivity.calculationThread.enqueueKey(nativeCode + 128);
-                synchronized (this.calculatorActivity.calculationThread) {
-                    this.calculatorActivity.calculationThread.notify();
-                }
-            }
-        } else if (keyIndex >= 0 && keyIndex <= 39 && keyIndex != 30) {
-            this.calculatorActivity.keyPressed(keyIndex, true);
+        if (this.activeKeyIndex != -1) {
+            this.activeKeyIndex = -1;
+            clearKeyHighlight();
         }
     }
 
